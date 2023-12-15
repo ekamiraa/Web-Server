@@ -103,7 +103,7 @@ class Client
     //PRODUK
     public function tampilSemuaProduk()
     {
-        $client = curl_init($this->url);
+        $client = curl_init($this->url . "?aksi=tampil_semua_produk");
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -117,7 +117,7 @@ class Client
     public function tampilDataProduk($id_produk)
     {
         $id_produk = $this->filter($id_produk);
-        $client = curl_init($this->url . "?aksi=tampil&id_barang=" . $id_produk); //lihat server.php
+        $client = curl_init($this->url . "?aksi=tampil_produk&id_produk=" . $id_produk); //lihat server.php
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -134,15 +134,20 @@ class Client
         "harga":"' . $data['harga'] . '",
         "desk":"' . $data['desk'] . '",
         "stok":"' . $data['stok'] . '",
-        "gambar":"' . $data['gambar'] . '",
+        "images":"' . $data['images'] . '",
         "aksi":"' . $data['aksi'] . '"
     }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=tambah_produk");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
         $response = curl_exec($c);
+        if ($response === false) {
+            echo 'Curl error: ' . curl_error($c);
+        } else {
+            echo "Data berhsil ditambahkan";
+        }
         curl_close($c);
         unset($data, $c, $response);
     }
@@ -155,11 +160,11 @@ class Client
             "harga":"' . $data['harga'] . '",
             "desk":"' . $data['desk'] . '",
             "stok":"' . $data['stok'] . '",
-            "gambar":"' . $data['gambar'] . '",
+            "images":"' . $data['images'] . '",
             "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=ubah_produk");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
@@ -189,7 +194,7 @@ class Client
     //PESANAN
     public function tampilSemuaPesanan()
     {
-        $client = curl_init($this->url);
+        $client = curl_init($this->url . "?aksi=tampil_semua_pesanan");
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -203,7 +208,7 @@ class Client
     public function tampilDataPesanan($id_pesanan)
     {
         $id_pesanan = $this->filter($id_pesanan);
-        $client = curl_init($this->url . "?aksi=tampil&id_barang=" . $id_pesanan); //lihat server.php
+        $client = curl_init($this->url . "?aksi=tampil_pesanan&id_pesanan=" . $id_pesanan); //lihat server.php
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -218,11 +223,12 @@ class Client
             "id_pesanan":"' . $data['id_pesanan'] . '",
             "id_pelanggan":"' . $data['id_pelanggan'] . '",
             "id_produk":"' . $data['id_produk'] . '",
-            "tanggal_pesan":"' . $data['tanggal_pesan'] . '",
-            "jumlah":"' . $data['jumlah'] . '"
+            "tanggal_pesanan":"' . $data['tanggal_pesanan'] . '",
+            "jumlah":"' . $data['jumlah'] . '",
+            "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=tambah_pesanan");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
@@ -231,17 +237,21 @@ class Client
         unset($data, $c, $response);
     }
 
+
+
+
     public function ubah_data_pesanan($data)
     {
         $data = '{
             "id_pesanan":"' . $data['id_pesanan'] . '",
             "id_pelanggan":"' . $data['id_pelanggan'] . '",
             "id_produk":"' . $data['id_produk'] . '",
-            "tanggal_pesan":"' . $data['tanggal_pesan'] . '",
-            "jumlah":"' . $data['jumlah'] . '"
+            "tanggal_pesanan":"' . $data['tanggal_pesanan'] . '",
+            "jumlah":"' . $data['jumlah'] . '",
+            "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=ubah_pesanan");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
@@ -270,7 +280,7 @@ class Client
     //DETAIL PESANAN
     public function tampilSemuaDetailPesanan()
     {
-        $client = curl_init($this->url);
+        $client = curl_init($this->url . "?aksi=tampil_detail_semua");
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -284,7 +294,7 @@ class Client
     public function tampilDetailPesanan($id_detail)
     {
         $id_detail = $this->filter($id_detail);
-        $client = curl_init($this->url . "?aksi=tampil&id_barang=" . $id_detail); //lihat server.php
+        $client = curl_init($this->url . "?aksi=tampil_detail&id_detail=" . $id_detail); //lihat server.php
         curl_setopt($client, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($client);
         curl_close($client);
@@ -301,10 +311,12 @@ class Client
             "id_pesanan":"' . $data['id_pesanan'] . '",
             "id_produk":"' . $data['id_produk'] . '",
             "jumlah_produk":"' . $data['jumlah_produk'] . '",
-            "subtotal":"' . $data['subtotal'] . '"
+            "subtotal":"' . $data['subtotal'] . '",
+            "metode_pembayaran":"' . $data['metode_pembayaran'] . '",
+            "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=tambah_detail");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
@@ -313,17 +325,19 @@ class Client
         unset($data, $c, $response);
     }
 
-    public function ubah_data_detail_pesanan($data)
+    public function ubah_detail_pesanan($data)
     {
         $data = '{
             "id_detail":"' . $data['id_detail'] . '",
             "id_pesanan":"' . $data['id_pesanan'] . '",
             "id_produk":"' . $data['id_produk'] . '",
             "jumlah_produk":"' . $data['jumlah_produk'] . '",
-            "subtotal":"' . $data['subtotal'] . '"
+            "subtotal":"' . $data['subtotal'] . '",
+            "metode_pembayaran":"' . $data['metode_pembayaran'] . '",
+            "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=ubah_detail");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);
@@ -340,7 +354,7 @@ class Client
             "aksi":"' . $data['aksi'] . '"
         }';
         $c = curl_init();
-        curl_setopt($c, CURLOPT_URL, $this->url);
+        curl_setopt($c, CURLOPT_URL, $this->url . "?aksi=hapus_detail");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $data);

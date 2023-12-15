@@ -12,7 +12,7 @@ include "Client.php";
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Admin | Pelanggan</title>
+  <title>KOREAN FOOD RESTO</title>
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -38,7 +38,7 @@ include "Client.php";
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Admin</div>
+        <div class="sidebar-brand-text mx-3">Kasir</div>
       </a>
 
       <!-- Divider -->
@@ -71,7 +71,7 @@ include "Client.php";
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="kategori.php">
+        <a class="nav-link" href="produk.php">
           <i class="bi bi-card-checklist"></i>
           <span>Produk</span></a>
       </li>
@@ -81,8 +81,8 @@ include "Client.php";
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="article.php">
-          <i class="bi bi-pencil-fill"></i>
+        <a class="nav-link" href="pesanan.php">
+          <i class="bi bi-cart-check-fill"></i>
           <span>Pesanan</span></a>
       </li>
 
@@ -91,8 +91,8 @@ include "Client.php";
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="article.php">
-          <i class="bi bi-envelope-fill"></i>
+        <a class="nav-link" href="detail_pesanan.php">
+          <i class="bi bi-envelope-check-fill"></i>
           <span>Detail Pesanan</span></a>
       </li>
 

@@ -12,6 +12,7 @@ if ($_POST['aksi'] == 'tambah') {
         "aksi" => $_POST["aksi"]
     );
     $abc->tambah_data_pelanggan($data);
+    var_dump($_POST);
     header('location:pelanggan.php');
 } else if ($_POST['aksi'] == 'ubah') {
     $data = array(
