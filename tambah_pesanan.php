@@ -40,7 +40,7 @@ include "Client.php";
 
           <div class="p-5">
             <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Masukkan Data Pelanggan!</h1>
+              <h1 class="h4 text-gray-900 mb-4">Masukkan Data Pesanan!</h1>
             </div>
             <form class="user" action="proses_pesanan.php" method="POST">
 

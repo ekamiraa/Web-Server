@@ -202,7 +202,7 @@ include "Client.php";
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Selamat Datang</h1>
           <p class="mb-4">
-            Silahkan kelola daftar pelanggan.
+            Silahkan kelola daftar produk.
           </p>
           <a href="tambah_produk.php" class="btn btn-primary" type="button" name="tambah_pelanggan_btn">Tambah
             Produk</a>

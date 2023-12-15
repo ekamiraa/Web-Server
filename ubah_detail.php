@@ -40,11 +40,10 @@ include "Client.php";
 
           <div class="p-5">
             <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Masukkan Detail Pesanan!</h1>
+              <h1 class="h4 text-gray-900 mb-4">Ubah Detail Pesanan!</h1>
             </div>
             <?php
             $r = $abc->tampilDetailPesanan($_GET['id_detail']);
-            var_dump($r);
             ?>
             <form class="user" action="proses_detail_pesanan.php" method="POST">
 
